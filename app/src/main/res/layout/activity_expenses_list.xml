@@ -6,4 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ExpensesListActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Categories"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar_expenses_list" />
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview_expenses_list"/>
+
 </android.support.constraint.ConstraintLayout>

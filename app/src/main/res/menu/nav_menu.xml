@@ -1,4 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:title="Prefrences">
+        <menu>
+            <item
+                android:id="@+id/navemenuitem_customize_categories"
+                android:title="Customize Categories"/>
+            <item
+                android:id="@+id/navmenuitem_inputmodefordecimals"
+                android:title="Input Mode For Decimal Numbers"
+                />
+        </menu>
+    </item>
+    <item
+        android:title="Data">
+        <menu>
+            <item
+                android:id="@+id/navemenuitem_exportcsv"
+                android:title="Export CSV"/>
+            <item
+                android:id="@+id/navmenuitem_exportjson"
+                android:title="Export JSON"
+                />
+            <item
+                android:id="@+id/navmenuitem_importinstrucitons"
+                android:title="Import Instructions"
+                />
+        </menu>
+    </item>
+    <item
+        android:title="Please choose Export JSON if you want to make backup ">
+    </item>
+<item
+    android:title="APP">
+        <menu>
+            <item
+                android:id="@+id/navemenuitem_feedback"
+                android:title="Feedback"/>
+            <item
+                android:id="@+id/navmenuitem_ratethisapp"
+                android:title="Rate This App"
+                />
+            <item
+                android:id="@+id/navmenuitem_aboutus"
+                android:title="AboutUs"
+                />
+        </menu>
+    </item>
 </menu>

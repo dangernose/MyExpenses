@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddCategory">
+    android:orientation="vertical"
+    tools:context=".AddCategoryActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:title="Categories"
+        android:background="@color/colorPrimary"
+        android:id="@+id/toolbar_add_category">
+        <EditText
+            android:id="@+id/edittext_category_name"
+            android:layout_width="150dp"
+            android:inputType="textPersonName"
+            android:layout_height="50dp" />
+    </android.support.v7.widget.Toolbar>
+    <GridView
+        android:id="@+id/addcategory_gridview_imagelist"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:padding="8dp"
+        android:numColumns="6"
+        android:verticalSpacing="8dp"
+        android:choiceMode="singleChoice"
+        ></GridView>
+
+</LinearLayout>

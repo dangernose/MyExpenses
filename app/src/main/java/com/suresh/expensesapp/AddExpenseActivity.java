@@ -3,7 +3,7 @@ package com.suresh.expensesapp;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class AddExpense extends AppCompatActivity {
+public class AddExpenseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
