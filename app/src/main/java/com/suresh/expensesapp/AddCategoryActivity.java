@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ public class AddCategoryActivity extends AppCompatActivity {
     DatabaseAdapter dbAdapter;
     EditText category_name;
     private int category_image;
+    Menu menu;
 
 
 
@@ -46,6 +48,11 @@ public class AddCategoryActivity extends AppCompatActivity {
         dbAdapter = new DatabaseAdapter(getApplicationContext());
         TypedArray images_array;
         images_array = getResources().obtainTypedArray(R.array.category_icons);
+        Intent intent = getIntent();
+        if(intent.getExtras()!=null){
+            Integer categoryid = intent.getExtras().getInt("categoryid");
+            Toast.makeText(getApplicationContext(),String.valueOf(categoryid),Toast.LENGTH_SHORT).show();
+        }
 
         final int[] images = {
                 R.drawable.icon01,
@@ -133,7 +140,13 @@ public class AddCategoryActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if(TextUtils.isEmpty(category_name.getText())){
-
+                    if(menu!=null){
+                        menu.findItem(R.id.menu_addcategory_save).setEnabled(false);
+                    }
+                }else {
+                    if(menu!=null){
+                        menu.findItem(R.id.menu_addcategory_save).setEnabled(true);
+                    }
                 }
             }
 
@@ -150,8 +163,18 @@ public class AddCategoryActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_addcategory_save,menu);
 //        menu.findItem(R.menu.menu_addcategory_save).setEnabled(false);
+        this.menu = menu;
         return true;
     }
+
+//    @Override
+//    public boolean onPrepareOptionsMenu(Menu menu) {
+//        if(TextUtils.isEmpty(category_name.getText()))
+//        {
+////            menu.findItem(R.menu.menu_addcategory_save).setEnabled(false);
+//        }
+//        return super.onPrepareOptionsMenu(menu);
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -200,10 +223,19 @@ public class AddCategoryActivity extends AppCompatActivity {
             }else {
                 imageView = (ImageView) parentview;
             }
-            imageView.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
             imageView.setImageResource(icons[position]);
+            if(icons[position]!=category_image){
+                imageView.setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP);
+            }
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    category_image = icons[position];
+                    imageView.clearColorFilter();
+                    Toast.makeText(context,String.valueOf(icons[position]),Toast.LENGTH_SHORT).show();
+                }
+            });
             return imageView;
-
         }
     }
 }

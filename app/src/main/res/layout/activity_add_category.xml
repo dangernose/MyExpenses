@@ -10,13 +10,15 @@
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:title="Categories"
+        app:title="New Category"
         android:background="@color/colorPrimary"
         android:id="@+id/toolbar_add_category">
         <EditText
             android:id="@+id/edittext_category_name"
             android:layout_width="150dp"
+            android:background="@android:color/transparent"
             android:inputType="textPersonName"
+            android:textColor="@android:color/white"
             android:layout_height="50dp" />
     </android.support.v7.widget.Toolbar>
     <GridView

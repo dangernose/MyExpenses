@@ -16,9 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CategoriesActivity extends AppCompatActivity {
+    DatabaseAdapter dbAdapter;
     private RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
 
@@ -37,16 +39,14 @@ public class CategoriesActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview_categories_list);
 
         List<Category> categories = new ArrayList<>();
-//        categories.add(new Category("General","9",""));
-//        categories.add(new Category("Food","8",""));
-
+        dbAdapter = new DatabaseAdapter(getApplicationContext());
+        categories = dbAdapter.getallCategories();
+//        categories.add(new Category("General",R.drawable.icon01));
+//        categories.add(new Category("Food",R.drawable.icon02));
+//        categories
         layoutManager =  new LinearLayoutManager(this);
-
-
         recyclerView.setLayoutManager(layoutManager);
-
         categoryRecyclerAdapter = new CategoryRecyclerAdapter(getApplicationContext(),categories);
-
         recyclerView.setAdapter(categoryRecyclerAdapter);
 
 
@@ -81,8 +81,16 @@ public class CategoriesActivity extends AppCompatActivity {
 
         @NonNull
         @Override
-        public ViewHolderCategory onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        public ViewHolderCategory onCreateViewHolder(@NonNull ViewGroup viewGroup, final int i) {
             View view = LayoutInflater.from(context).inflate(R.layout.viewholder_category,viewGroup,false);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(CategoriesActivity.this, AddCategoryActivity.class);
+                    intent.putExtra("categoryid",categories.get(i).getCategoryId());
+                    startActivity(intent);
+                }
+            });
             ViewHolderCategory viewHolder = new ViewHolderCategory(view);
             return viewHolder;
         }

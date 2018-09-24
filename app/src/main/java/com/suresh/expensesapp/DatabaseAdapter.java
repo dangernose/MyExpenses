@@ -10,6 +10,8 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.webkit.ConsoleMessage.MessageLevel.LOG;
 
@@ -100,6 +102,25 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 //        category.setCategoryName(c.getString(c.getColumnIndex(CATEGORY_COL_2)));
 //        category.setCategoryicon(c.getInt(c.getColumnIndex(CATEGORY_COL_3)));
         return category;
+    }
+
+    public List<Category> getallCategories(){
+        List<Category> categories = new ArrayList<Category>();
+        String selectQuery = "SELECT * FROM " +
+                TABLE_CATEGORY;
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery,null);
+        if(c.moveToFirst()){
+            do{
+                Category category = new Category(
+                        c.getInt(c.getColumnIndex(CATEGORY_COL_1)),
+                        c.getString(c.getColumnIndex(CATEGORY_COL_2)),
+                        c.getInt(c.getColumnIndex(CATEGORY_COL_3))
+                        );
+                categories.add(category);
+            }while (c.moveToNext());
+        }
+        return categories;
     }
 
     public int updateCategory(int categoryid, String categoryname, String categoryicon ){
